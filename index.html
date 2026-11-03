@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIR AAP BAHOT ACHE HO | RSTB</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
+
+:root{--g:#39ff14;--bg:#020702;--panel:rgba(0,8,2,.88)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:#e4ffe5;font-family:'Share Tech Mono',monospace;overflow-x:hidden}
+#matrix{position:fixed;inset:0;z-index:-2;opacity:.14;pointer-events:none}
+body:after{content:"";position:fixed;inset:0;z-index:10;pointer-events:none;background:repeating-linear-gradient(transparent 0 3px,rgba(57,255,20,.035) 4px)}
+header{position:sticky;top:0;z-index:20;background:#020802ed;border-bottom:1px solid var(--g);padding:15px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.logo{font:bold 16px Orbitron;color:var(--g)}
+nav{display:flex;gap:15px;flex-wrap:wrap}
+nav a{color:#c8e8ca;text-decoration:none;font-size:12px}
+nav a:hover{color:var(--g)}
+button{font-family:inherit;cursor:pointer}
+.sound{background:transparent;border:1px solid var(--g);color:var(--g);padding:10px}
+.hero{min-height:590px;position:relative;display:flex;align-items:center;padding:60px 8%;overflow:hidden;background:linear-gradient(90deg,#020702f5,#02070299,#02070255)}
+.hero-content{position:relative;z-index:2;max-width:650px}
+.small{color:var(--g);letter-spacing:4px;font-size:12px}
+h1,h2,h3{font-family:Orbitron,sans-serif}
+h1{font-size:clamp(36px,7vw,75px);line-height:1.1;text-shadow:0 0 20px #39ff1477}
+h2{font-size:clamp(23px,4vw,36px)}
+.green{color:var(--g)}
+.hero p{line-height:1.8;color:#c2d8c3}
+.location{display:inline-block;border:1px solid var(--g);padding:12px;color:var(--g);margin-top:12px}
+
+/* CSS Minecraft plains scene */
+.minecraft{position:absolute;inset:0;overflow:hidden;z-index:0;background:linear-gradient(#101e34 0%,#344b52 43%,#719052 44%,#263e18 100%)}
+.sun{position:absolute;right:20%;top:18%;width:65px;height:65px;background:#d8e9c5;box-shadow:0 0 50px #d8e9c588}
+.hill{position:absolute;bottom:22%;width:120%;height:160px;left:-10%;background:#526d35;clip-path:polygon(0 50%,15% 25%,35% 50%,50% 5%,70% 45%,85% 20%,100% 50%,100% 100%,0 100%)}
+.ground{position:absolute;bottom:0;height:27%;width:100%;background:repeating-linear-gradient(90deg,#314e20 0 45px,#385927 46px 90px);border-top:8px solid #668a39}
+.tree{position:absolute;bottom:25%;right:13%;width:55px;height:190px;background:repeating-linear-gradient(#69452a 0 35px,#795333 36px 65px)}
+.tree:before{content:"";position:absolute;bottom:125px;left:-65px;width:180px;height:115px;background:#244a20;box-shadow:0 -45px #315c28,50px -75px #274c21,-45px -25px #3d702d}
+.player{position:absolute;bottom:26%;right:32%;width:48px;height:100px}
+.player-head{position:absolute;top:0;left:8px;width:36px;height:36px;background:#b77e53;border:4px solid #181b16}
+.player-body{position:absolute;top:35px;left:5px;width:43px;height:45px;background:#075e31;border:4px solid #151b15}
+.player-leg{position:absolute;top:77px;width:18px;height:28px;background:#20252b}
+.player-leg.one{left:7px}.player-leg.two{right:3px}
+.player-arm{position:absolute;top:38px;right:-18px;width:18px;height:48px;background:#b77e53;transform:rotate(-30deg);border:3px solid #171717}
+.nametag{position:absolute;top:-35px;left:-30px;background:#111b;color:white;padding:4px 8px;font-size:13px;white-space:nowrap}
+.wood{position:absolute;right:12%;bottom:34%;font-size:25px;color:#d9b47b;animation:wood .8s infinite alternate}
+@keyframes wood{to{transform:translate(15px,-15px) rotate(35deg)}}
+section{padding:70px 8%;border-bottom:1px solid #39ff1433}
+.panel,.card{background:var(--panel);border:1px solid #39ff1455;padding:23px;box-shadow:0 0 20px #39ff140b}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{transition:.2s}.card:hover{transform:translateY(-5px);border-color:var(--g)}
+.card h3{color:var(--g);font-size:16px}
+.card p,.muted{color:#a9c0ab;line-height:1.7}
+.count{text-align:center;background:linear-gradient(#001000dd,#020702f5)}
+.glitch{color:var(--g);animation:glitch 1.5s infinite}
+@keyframes glitch{0%,90%,100%{transform:translate(0)}92%{transform:translate(3px,-2px)}95%{transform:translate(-3px,2px)}}
+.timer{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:30px}
+.time{border:1px solid var(--g);padding:20px;min-width:100px;background:#000}
+.time strong{display:block;color:var(--g);font:bold 30px Orbitron}
+.time span{font-size:11px}
+.award{padding:14px;margin:10px 0;border-left:3px solid var(--g);background:#39ff140b}
+.award b{color:var(--g)}
+form{display:grid;gap:12px}
+input,textarea,select{background:#061008;color:white;border:1px solid #39ff1477;padding:13px;font:14px 'Share Tech Mono'}
+.submit{background:var(--g);border:0;color:#001000;padding:13px;font-weight:bold}
+#submissions{margin-top:20px}
+.submission{border:1px solid #39ff1455;padding:13px;margin:10px 0}
+footer{text-align:center;padding:30px;color:#759178}
+
+/* Secret popup */
+.overlay{position:fixed;inset:0;z-index:50;background:#000d;display:none;align-items:center;justify-content:center;padding:20px}
+.popup{position:relative;width:min(520px,90vw);min-height:310px;background:radial-gradient(circle,#06300d,#010602 70%);border:2px solid var(--g);box-shadow:0 0 35px #39ff1477;text-align:center;padding:35px 25px;animation:appear .5s}
+@keyframes appear{from{transform:scale(.65);opacity:0}to{transform:scale(1);opacity:1}}
+.emblem{width:115px;height:115px;margin:0 auto 20px;border:2px solid var(--g);border-radius:50%;display:grid;place-items:center;font-size:65px;color:var(--g);box-shadow:0 0 25px #39ff1477}
+.popup h2{font-size:19px;color:var(--g)}
+.popup button{background:var(--g);border:0;padding:12px 20px;color:#001000;font-weight:bold;margin-top:12px}
+.close{position:absolute;right:12px;top:10px;background:transparent!important;color:white!important;font-size:20px}
+#attireDetails{display:none;margin-top:20px;text-align:left}
+@media(max-width:600px){header{justify-content:center}nav{justify-content:center}.hero{min-height:560px;padding:35px 6%}.player{right:28%}.tree{right:5%}}
+</style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<header>
+ <div class="logo">RSTB // 2026</div>
+ <nav>
+  <a href="#countdown">COUNTDOWN</a>
+  <a href="#mission">MISSION</a>
+  <a href="#attire">CLASSIFIED</a>
+  <a href="#attendees">ATTENDEES</a>
+  <a href="#challenges">CHALLENGES</a>
+  <a href="#awards">AWARDS</a>
+ </nav>
+ <button class="sound" id="soundBtn" onclick="toggleSound()">▶ SOUND</button>
+</header>
+
+<div class="hero">
+ <div class="minecraft">
+  <div class="sun"></div><div class="hill"></div><div class="ground"></div>
+  <div class="tree"></div>
+  <div class="player">
+   <div class="nametag">raza_pro</div>
+   <div class="player-head"></div><div class="player-body"></div>
+   <div class="player-leg one"></div><div class="player-leg two"></div>
+   <div class="player-arm"></div>
+  </div>
+  <div class="wood">▪ ▪ ▪</div>
+ </div>
+ <div class="hero-content">
+  <div class="small">// OPERATION: DIWALI APOCALYPSE //</div>
+  <h1>DOOMSDAY<br><span class="green">THE FINAL PARTY</span></h1>
+  <h2>SIR AAP BAHOT ACHE HO</h2>
+  <p>An extraordinary event is approaching.<br>Prepare yourself for an unforgettable evening.</p>
+  <div class="location">06 NOVEMBER 2026<br>📍 Leap Of Taste, Krishna Nagar</div>
+ </div>
+</div>
+
+<section class="count" id="countdown">
+ <div class="small">WARNING // FINAL COUNTDOWN</div>
+ <h2 class="glitch">THE END IS NEAR.</h2>
+ <div class="timer">
+  <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
+  <div class="time"><strong id="hours">00</strong><span>HOURS</span></div>
+  <div class="time"><strong id="minutes">00</strong><span>MINUTES</span></div>
+  <div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
+ </div>
+ <p class="green" id="timerMessage">THE CLOCK IS TICKING...</p>
+</section>
+
+<section id="mission">
+ <div class="small">01 // EVENT INTELLIGENCE</div>
+ <h2>MISSION DETAILS</h2>
+ <div class="grid">
+  <div class="card"><h3>EVENT DATE</h3><p>06 November 2026</p></div>
+  <div class="card"><h3>LOCATION</h3><p>Leap Of Taste, Krishna Nagar</p></div>
+  <div class="card"><h3>MISSION OBJECTIVE</h3><p>Celebrate, participate, enjoy and create legendary memories.</p></div>
+ </div>
+</section>
+
+<section id="attire">
+ <div class="small">02 // CLASSIFIED INTELLIGENCE</div>
+ <h2>SECRET ATTIRE RECOMMENDATIONS</h2>
+ <div class="panel">
+  <h3 class="green">DRESS CODE INTELLIGENCE</h3>
+  <p class="muted">Black shirt + dark jeans • Festive kurta • White shirt + dark jeans • Clean sneakers • Watch/accessories.</p>
+  <p class="muted">Choose a comfortable outfit and wear what makes you feel confident.</p>
+ </div>
+</section>
+
+<section id="attendees">
+ <div class="small">03 // PERSONNEL DATABASE</div>
+ <h2>ATTENDEE PROFILES</h2>
+ <p class="muted">Submit your information to join the RSTB personnel database.</p>
+ <div class="panel">
+  <form id="profileForm">
+   <input id="personName" placeholder="Your name" required maxlength="40">
+   <input id="personUsername" placeholder="Nickname / Minecraft username" maxlength="40">
+   <select id="personRole">
+    <option value="Attendee">Attendee</option>
+    <option value="Performer">Performer</option>
+    <option value="Organiser">Organiser</option>
+   </select>
+   <textarea id="personBio" placeholder="A short intro about yourself..." rows="3" maxlength="180"></textarea>
+   <button class="submit" type="submit">UPLOAD MY PROFILE</button>
+  </form>
+  <div id="formMessage" class="green"></div>
+ </div>
+ <h3 class="green">REGISTERED ON THIS DEVICE</h3>
+ <div id="submissions"></div>
+</section>
+
+<section id="challenges">
+ <div class="small">04 // ENTERTAINMENT PROTOCOL</div>
+ <h2>MSTI CHALLENGES</h2>
+ <div class="grid">
+  <div class="card"><h3>01. RAMP WALK</h3><p>Own the runway. Confidence is the qualification.</p></div>
+  <div class="card"><h3>02. SINGING COMPETITION</h3><p>Grab the mic and let your voice take over.</p></div>
+  <div class="card"><h3>03. DANCE COMPETITION</h3><p>Bring your best moves. The stage is yours.</p></div>
+ </div>
+</section>
+
+<section id="awards">
+ <div class="small">05 // RECOGNITION DIVISION</div>
+ <h2>THE RSTB AWARDS</h2>
+ <div class="grid">
+  <div>
+   <div class="award"><b>MR. RSTB</b><br>The Gentleman of the Event</div>
+   <div class="award"><b>MRS. RSTB</b><br>The Star of the Event</div>
+   <div class="award"><b>BEST DRESSED</b><br>The Style Icon</div>
+   <div class="award"><b>BEST PERFORMER</b><br>The Stage Legend</div>
+  </div>
+  <div>
+   <div class="award"><b>BEST DANCER</b><br>The Rhythm Master</div>
+   <div class="award"><b>BEST SINGER</b><br>The Voice of the Night</div>
+   <div class="award"><b>THE ENTERTAINER</b><br>The Crowd Favourite</div>
+   <div class="award"><b>LEGEND AWARD</b><br>Unforgettable Presence</div>
+  </div>
+ </div>
+ <p class="muted">More award categories will be revealed soon...</p>
+</section>
+
+<footer>
+ SIR AAP BAHOT ACHE HO<br><br>
+ RSTB EVENT SYSTEM // 2026<br>
+ <span class="green">END OF TRANSMISSION</span>
+</footer>
+
+<!-- Secret popup -->
+<div class="overlay" id="secretPopup">
+ <div class="popup">
+  <button class="close" onclick="closePopup()">×</button>
+  <div class="emblem">♜</div>
+  <h2>SECRET ATTIRE RECOMMENDATIONS</h2>
+  <p class="muted">A classified message has arrived.</p>
+  <button onclick="showAttire()">VIEW RECOMMENDATIONS →</button>
+  <div id="attireDetails">
+   <p class="green">CLASSIFIED DRESS CODE</p>
+   <p>01 // Black shirt + dark jeans</p>
+   <p>02 // Traditional festive kurta</p>
+   <p>03 // White shirt + dark jeans</p>
+   <p>04 // Clean sneakers + watch</p>
+   <p class="muted">Dress comfortably. Confidence is the real style.</p>
+  </div>
+ </div>
+</div>
+
+<script>
+// MATRIX EFFECT
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+let drops=[];
+function resize(){
+ canvas.width=innerWidth;canvas.height=innerHeight;
+ drops=Array(Math.floor(canvas.width/15)).fill(1);
+}
+resize();window.addEventListener("resize",resize);
+function matrix(){
+ ctx.fillStyle="rgba(0,0,0,.09)";
+ ctx.fillRect(0,0,canvas.width,canvas.height);
+ ctx.fillStyle="#39ff14";ctx.font="14px monospace";
+ drops.forEach((y,i)=>{
+  ctx.fillText("01RSTB"[Math.floor(Math.random()*6)],i*15,y*15);
+  if(y*15>canvas.height&&Math.random()>.975)drops[i]=0;
+  drops[i]++;
+ });
+}
+setInterval(matrix,50);
+
+// COUNTDOWN
+const partyDate=new Date(2026,10,6,0,0,0);
+function updateTimer(){
+ let d=partyDate-new Date();
+ if(d<=0){
+  document.getElementById("timerMessage").textContent="OPERATION DAY HAS ARRIVED!";
+  d=0;
+ }
+ document.getElementById("days").textContent=Math.floor(d/86400000);
+ document.getElementById("hours").textContent=Math.floor(d/3600000)%24;
+ document.getElementById("minutes").textContent=Math.floor(d/60000)%60;
+ document.getElementById("seconds").textContent=Math.floor(d/1000)%60;
+}
+updateTimer();setInterval(updateTimer,1000);
+
+// POPUP AFTER 5 SECONDS
+setTimeout(()=>{
+ document.getElementById("secretPopup").style.display="flex";
+},5000);
+function closePopup(){
+ document.getElementById("secretPopup").style.display="none";
+}
+function showAttire(){
+ document.getElementById("attireDetails").style.display="block";
+}
+
+// ATTENDEE FORM: SAVES ON THIS BROWSER ONLY
+const form=document.getElementById("profileForm");
+function getProfiles(){
+ return JSON.parse(localStorage.getItem("rstbProfiles")||"[]");
+}
+function displayProfiles(){
+ const profiles=getProfiles();
+ document.getElementById("submissions").innerHTML="";
+ profiles.forEach(p=>{
+  const div=document.createElement("div");
+  div.className="submission";
+  const name=document.createElement("b");
+  name.className="green";name.textContent=p.name;
+  const details=document.createElement("p");
+  details.textContent=(p.username||"No nickname")+" | "+p.role+" | "+(p.bio||"No introduction");
+  div.append(name,details);
+  document.getElementById("submissions").appendChild(div);
+ });
+}
+form.addEventListener("submit",function(e){
+ e.preventDefault();
+ const profiles=getProfiles();
+ profiles.push({
+  name:document.getElementById("personName").value.trim(),
+  username:document.getElementById("personUsername").value.trim(),
+  role:document.getElementById("personRole").value,
+  bio:document.getElementById("personBio").value.trim()
+ });
+ localStorage.setItem("rstbProfiles",JSON.stringify(profiles));
+ form.reset();
+ document.getElementById("formMessage").textContent="PROFILE SAVED ON THIS DEVICE!";
+ displayProfiles();
+});
+displayProfiles();
+
+// LOW VOLUME ELECTRONIC AMBIENCE
+let audio=null,oscillators=[],soundOn=false;
+function toggleSound(){
+ const btn=document.getElementById("soundBtn");
+ if(!soundOn){
+  audio=new(window.AudioContext||window.webkitAudioContext)();
+  const master=audio.createGain();master.gain.value=.025;
+  master.connect(audio.destination);
+  [55,82,110].forEach((f,i)=>{
+   const o=audio.createOscillator(),g=audio.createGain();
+   o.type="sawtooth";o.frequency.value=f;g.gain.value=i===0?.3:.1;
+   o.connect(g);g.connect(master);o.start();oscillators.push(o);
+  });
+  soundOn=true;btn.textContent="■ STOP SOUND";
+ }else{
+  oscillators.forEach(o=>o.stop());oscillators=[];
+  audio.close();audio=null;soundOn=false;btn.textContent="▶ SOUND";
+ }
+}
+</script>
+</body>
+</html>
